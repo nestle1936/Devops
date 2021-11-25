@@ -24,24 +24,26 @@ echo "What is the port"
 read PORT
 
 #Write in the Dokerfile
- "FROM $IMAGE" >> Dockerfile
- "ENV MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD" >> Dockerfile
- "ENV MYSQL_PASSWORD=$MYSQL_PASSWORD" >> Dockerfile
- "ENV MYSQL_USER=$MYSQL_USER" >> Dockerfile
- "ENV MYSQL_DATABASE=$MYSQL_DATABASE" >> Dockerfile
- "RUN mkdir -p /home/$WORKDIR" >> Dockerfile
- "COPY ./ /home/$WORKDIR" >> Dockerfile
- "WORKDIR /home/$WORKDIR" >> Dockerfile
- "EXPOSE $PORT " >> Dockerfile
+text= "FROM $IMAGE
+    ENV MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+    ENV MYSQL_PASSWORD=$MYSQL_PASSWORD
+    ENV MYSQL_USER=$MYSQL_USER
+    ENV MYSQL_DATABASE=$MYSQL_DATABASE
+    RUN mkdir -p /home/$WORKDIR
+    COPY ./ /home/$WORKDIR
+    WORKDIR /home/$WORKDIR
+    EXPOSE $PORT"
+echo "$text" > Dockerfile
+echo CMD ["apache2-foreground"] >> Dockerfile
  #Add volume for persistance
- CMD ["apache2-foreground"] >> Dockerfile
-echo "Check this informations and answer y(Yes) if correct or no n(No)"
-cat Dockerfile
+
+echo "Check this informations down there and answer y(Yes) no n(No)"
+
 read VALIDATOR
 val=y
 if [ "$VALIDATOR" ==  $val ]
 then
-    docker  build -f Dockerfile .
+    docker build -t dockerscript:1.0 .
     rm -f Dockerfile
     echo "image cree"
  else
