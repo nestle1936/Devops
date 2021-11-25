@@ -8,10 +8,8 @@ touch Dockerfile
 #Declared the variables
 echo "what your base image?"
 read IMAGE
-
 echo "What is the creator?"
 read MAINTEAINER
-
 echo "What is the Root password for database"
 read MYSQL_ROOT_PASSWORD
 echo "What is the user password for user"
@@ -35,12 +33,13 @@ read PORT
  "COPY ./ /home/$WORKDIR" >> Dockerfile
  "WORKDIR /home/$WORKDIR" >> Dockerfile
  "EXPOSE $PORT " >> Dockerfile
+ #Add volume for persistance
  CMD ["apache2-foreground"] >> Dockerfile
 echo "Check this informations and answer y(Yes) if correct or no n(No)"
 cat Dockerfile
 read VALIDATOR
 val=y
-if [ -f Dockerfile && "$VALIDATOR" ==  $val ]
+if [ "$VALIDATOR" ==  $val ]
 then
     docker  build -f Dockerfile .
     rm -f Dockerfile
