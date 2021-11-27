@@ -13,15 +13,6 @@ cd $LOCAL_WORKDIR
 echo "Please enter the name of your Wep Directory"
 read LOCAL_WEBDIR
 mkdir $LOCAL_WEBDIR
-cd $LOCAL_WEBDIR
-cp 
-#echo "What is the link of your wodpress_app.tar file. You can also copy and paste this link...."
-#read WORDPRESS_LINK
-scp -r  &
-#echo "Creating web files......"
-#tar .... &
-#rm -rf *.tar
-cd ..
 echo "......................Docker............................."
 #4. Create a file named Dokerfile
 echo "Your Dockerfile is created ..."
