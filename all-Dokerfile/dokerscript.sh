@@ -2,50 +2,63 @@
 #Author: Nestor
 #Date: November 2021
 
-#1. Create a file name Dokerfile
+#Download and prepare the work place to the web server
+#1. Create a work place in local machine
+echo "Name your Workdir in your local machine"
+read LOCAL_WORKDIR
+mkdir $LOCAL_WORKDIR
+#2. Move in your workdir
+cd $LOCAL_WORKDIR
+#3. Create a directory name app to store wordpress
+echo "Please enter the name of your Wep Directory"
+read LOCAL_WEBDIR
+mkdir $LOCAL_WEBDIR
+cd $LOCAL_WEBDIR
+echo "What is the link of your wodpress_app.tar file. You can also copy and paste this link...."
+read WORDPRESS_LINK
+scp -r serge@unixtrainings.tk:/home/serge/school/* . pw: school1 &
+echo "Creating web files......"
+#tar .... &
+rm -rf *.tar
+cd ..
+echo "......................Docker............................."
+#4. Create a file named Dokerfile
+echo "Your Dockerfile is created ..."
 touch Dockerfile
-
-#Declared the variables
-echo "what your base image?"
-read IMAGE
-echo "What is the creator?"
-read MAINTEAINER
-echo "What is the Root password for database"
-read MYSQL_ROOT_PASSWORD
-echo "What is the user password for user"
-read MYSQL_PASSWORD
-echo "What is the User"
-read MYSQL_USER
-echo "What is the name of your Database"
-read MYSQL_DATABASE
-echo "What is the name of the work Directorie in your container"
-read WORKDIR
+sleep 3
+#5. Specify your apache base image
+echo "what your apache base image?"
+read IMAGE 
+#6. Labeling your container
+echo "What is the Maintainer?"
+read MAINTAINER
+#7. What the port of webserver
 echo "What is the port"
-read PORT
-
-#Write in the Dokerfile
-text= "FROM $IMAGE
-    ENV MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
-    ENV MYSQL_PASSWORD=$MYSQL_PASSWORD
-    ENV MYSQL_USER=$MYSQL_USER
-    ENV MYSQL_DATABASE=$MYSQL_DATABASE
+read WEB_PORT
+echo "What is the name of the work Directory in your container"
+read WORKDIR
+#Create Dockerfile
+DOCKERFILE= "FROM $IMAGE
     RUN mkdir -p /home/$WORKDIR
-    COPY ./ /home/$WORKDIR
+    COPY ./$LOCAL_WEBDIR /usr/local/apache2/htdocs/
     WORKDIR /home/$WORKDIR
-    EXPOSE $PORT"
-echo "$text" > Dockerfile
+    EXPOSE $WEB_PORT"
+echo "$DOCKERFILE" > Dockerfile
 echo CMD ["apache2-foreground"] >> Dockerfile
  #Add volume for persistance
-
+#8. Build image
+echo "How do you want to name your image"
+read IMAGE_NAME
+echo "What is the target name"
+read TAG_NAME
 echo "Check this informations down there and answer y(Yes) no n(No)"
-
 read VALIDATOR
-val=y
-if [ "$VALIDATOR" ==  $val ]
+VAL=y
+if [ "$VALIDATOR" ==  $VAL ]
 then
-    docker build -t dockerscript:1.0 .
+    docker build -t --name $IMAGE_NAME:$TAG_NAME .
     rm -f Dockerfile
-    echo "image cree"
+    echo "your image is created"
  else
     echo "Please create a new file"
     rm -f Dockerfile
