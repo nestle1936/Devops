@@ -13,6 +13,8 @@ cd $LOCAL_WORKDIR
 echo "Please enter the name of your Wep Directory"
 read LOCAL_WEBDIR
 mkdir $LOCAL_WEBDIR
+echo "Copy yiour web file in this location"
+cd ..
 echo "......................Docker............................."
 #4. Create a file named Dokerfile
 echo "Your Dockerfile is created ..."
@@ -44,6 +46,8 @@ read IMAGE_NAME
 echo "What is the target name"
 read TAG_NAME
 echo "Check this informations down there and answer y(Yes) no n(No)"
+cat Dockerfile
+echo
 read VALIDATOR
 VAL=y
 if [ "$VALIDATOR" ==  $VAL ]
