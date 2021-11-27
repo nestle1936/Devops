@@ -9,17 +9,18 @@ read LOCAL_WORKDIR
 mkdir $LOCAL_WORKDIR
 #2. Move in your workdir
 cd $LOCAL_WORKDIR
-#3. Create a directory name app to store wordpress
+#3. Create a directory name app to store Website
 echo "Please enter the name of your Wep Directory"
 read LOCAL_WEBDIR
 mkdir $LOCAL_WEBDIR
 cd $LOCAL_WEBDIR
-echo "What is the link of your wodpress_app.tar file. You can also copy and paste this link...."
-read WORDPRESS_LINK
-scp -r serge@unixtrainings.tk:/home/serge/school/* . pw: school1 &
-echo "Creating web files......"
+cp 
+#echo "What is the link of your wodpress_app.tar file. You can also copy and paste this link...."
+#read WORDPRESS_LINK
+scp -r  &
+#echo "Creating web files......"
 #tar .... &
-rm -rf *.tar
+#rm -rf *.tar
 cd ..
 echo "......................Docker............................."
 #4. Create a file named Dokerfile
@@ -56,7 +57,7 @@ read VALIDATOR
 VAL=y
 if [ "$VALIDATOR" ==  $VAL ]
 then
-    docker build -t --name $IMAGE_NAME:$TAG_NAME .
+    docker build --tag $IMAGE_NAME:$TAG_NAME .
     rm -f Dockerfile
     echo "your image is created"
  else
