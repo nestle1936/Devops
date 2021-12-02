@@ -12,12 +12,12 @@ services:
         depends_on:
             - mysql
         image: joomla:4.0.4-php7.4-apache
-        container_name: jl
+        container_name: joomla
         ports:
             - 8080:80
         environment:
             - JOOMLA_DB_HOST=mysql
-            - JOOMLA_DB_PASSWORD=school1
+            - JOOMLA_DB_PASSWORD=db_password
             - JOOMLA_DB_NAME=webserver
             - JOOMLA_DB_USER=root
         networks:
