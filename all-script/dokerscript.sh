@@ -13,7 +13,7 @@ cd $LOCAL_WORKDIR
 echo "Please enter the name of your Wep Directory"
 read LOCAL_WEBDIR
 mkdir $LOCAL_WEBDIR
-echo "Copy yiour web file in this location"
+echo "Copy your web file in this location"
 cd ..
 echo "......................Docker............................."
 #4. Create a file named Dokerfile
@@ -24,7 +24,7 @@ sleep 3
 echo "what your apache base image?"
 read IMAGE 
 #6. Labeling your container
-echo "What is the Maintainer?"
+echo "Who is the Maintainer?"
 read MAINTAINER
 #7. What the port of webserver
 echo "What is the port"
@@ -32,13 +32,16 @@ read WEB_PORT
 echo "What is the name of the work Directory in your container"
 read WORKDIR
 #Create Dockerfile
-DOCKERFILE= "FROM $IMAGE
-    RUN mkdir -p /home/$WORKDIR
-    COPY ./$LOCAL_WEBDIR /usr/local/apache2/htdocs/
-    WORKDIR /home/$WORKDIR
-    EXPOSE $WEB_PORT"
-echo "$DOCKERFILE" > Dockerfile
-echo CMD ["apache2-foreground"] >> Dockerfile
+if [ -f Dockerfile ] ;
+then
+
+    DOCKERFILE= "FROM $IMAGE
+        RUN mkdir -p /home/$WORKDIR
+        COPY ./$LOCAL_WEBDIR /usr/local/apache2/htdocs/
+        WORKDIR /home/$WORKDIR
+        EXPOSE $WEB_PORT"
+    echo "$DOCKERFILE" > Dockerfile
+    echo CMD ["apache2-foreground"] >> Dockerfile
  #Add volume for persistance
 #8. Build image
 echo "How do you want to name your image"
