@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  wordpress:
+    depends_on:
+      - mysql
+    image: wordpress:5.8.2-php7.4-apache
+    container_name: wordpress
+    environment:
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=db_password
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_NAME=webserver
+    ports:
+      - '8080:80'
+    networks:
+      - web
+    volumes:
+      - wordpressdata:/var/www/html
+
+  mysql:
+    image: mariadb:10.7.1-focal
+    container_name: mysql_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=db_password
+      - MYSQL_USER=wp_user
+      - MYSQL_PASSWORD=wp_password
+      - MYSQL_DATABASE=webserver
+    networks:
+      - web
+    volumes:
+      - database:/var/lib/mysql
+
+networks:
+  web:
+    driver: bridge
+
+volumes:
+  database:
+  wordpressdata:
