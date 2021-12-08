@@ -32,9 +32,8 @@ read WEB_PORT
 echo "What is the name of the work Directory in your container"
 read WORKDIR
 #Create Dockerfile
-if [ -f Dockerfile ] ;
+if [ -f Dockerfile ]
 then
-
     DOCKERFILE= "FROM $IMAGE
         RUN mkdir -p /home/$WORKDIR
         COPY ./$LOCAL_WEBDIR /usr/local/apache2/htdocs/
