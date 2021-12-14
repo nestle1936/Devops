@@ -1,5 +1,5 @@
 # Scripts
-This directory content many scripts for docker
+This directory content many scripts for docker and system administration
 
 ## Table of contents 
 **1. Server inventory**
