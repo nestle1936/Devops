@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Nestor
-#Github
+#Github:
 # Description: This script is use to create a Docker file and buil the image
 
 #Variables
