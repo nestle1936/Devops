@@ -5,3 +5,11 @@ echo "This script ran at $(date +%B%d,%T)"
 echo
 sleep 5
 echo "This is the script's end..."
+
+================================
+write a script to check if a pkg is installed,
+if installed, update it.
+if is not install, install it and display 
+the version of the package.
+===============================
+mocktar77/docker-image-script
