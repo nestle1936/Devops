@@ -1,0 +1,36 @@
+---
+  - hosts: web
+    ignore_errors: yes
+    become: yes
+    tasks:
+      - name: Add the user 'johnd' with a specific uid and a primary group of 'admin'
+        user:
+          name: johnd
+          comment: John Doe
+
+      - name: Create a directory if it does not exist
+        file:
+          path: /tmp/devop-ans
+          state: directory
+          mode: '0777'
+          owner: johnd
+
+      - name: Create a file if it does not exist
+        file:
+          path: /tmp/ansble-class
+          state: touch
+          mode: '0600'
+          owner: johnd
+
+---------------------
+---
+ - hosts: all
+   ignore_errors: yes
+   become: yes
+   tasks:
+
+   - name: Install tree
+     yum:
+      name: tree
+      state: present
+     when: ansible_distribution == "CentOS"
